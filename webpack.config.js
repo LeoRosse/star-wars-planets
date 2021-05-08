@@ -3,10 +3,10 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const path = require('path');
 
 const deps = require('./package.json').dependencies;
-module.exports = {
+module.exports = (_, argv) => ({
   entry: './src/index',
   output: {
-    publicPath: 'http://localhost:3002/',
+    publicPath: argv.mode === 'development' ? 'http://localhost:3002/' : 'https://start-wars-planets.vercel.app',
     path: path.resolve(__dirname, './build'),
   },
   resolve: {
@@ -67,4 +67,4 @@ module.exports = {
       template: path.join(__dirname, 'public', 'index.html'),
     }),
   ],
-};
+});
